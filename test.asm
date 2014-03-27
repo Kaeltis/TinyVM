@@ -1,3 +1,4 @@
 MUL 3,4
-MUL 4,3
-MUL 3,4
+SUB 3,4
+ADD 4,3
+DIV 4,3
