@@ -77,7 +77,7 @@ public class Main {
                 pc++;
                 break;
             case 12: //Commands.NOT
-                reg[idx0] = ~reg[idx1]; //TODO: ~ correct?
+                reg[idx0] = ~reg[idx1]; //TODO: ~ correct? - unary bitwise complement
                 pc++;
                 break;
             case 13: //TODO: Commands.RET
