@@ -44,9 +44,50 @@ public class Main {
         System.out.println("BEFORE CMD: " + cmd + " | IDX0: " + reg[idx0] + " | IDX1:" + reg[idx1]);
 
         switch (cmd) {
+            case 4: //Commands.AND
+                reg[idx0] = reg[idx0] & reg[idx1];
+                pc++;
+                break;
+            case 5: //Commands.OR
+                reg[idx0] = reg[idx0] | reg[idx1];
+                pc++;
+                break;
             case 6: //Commands.MUL
                 reg[idx0] = reg[idx0] * reg[idx1];
                 pc++;
+                break;
+            case 7: //Commands.DIV
+                reg[idx0] = reg[idx0] / reg[idx1];
+                pc++;
+                break;
+            case 8: //Commands.SUB
+                reg[idx0] = reg[idx0] - reg[idx1];
+                pc++;
+                break;
+            case 9: //Commands.ADD
+                reg[idx0] = reg[idx0] + reg[idx1];
+                pc++;
+                break;
+            case 10: //Commands.HIG
+                reg[idx0] = (reg[idx0] > reg[idx1]) ? 1 : 0;
+                pc++;
+                break;
+            case 11: //Commands.EQU
+                reg[idx0] = (reg[idx0] == reg[idx1]) ? 1 : 0;
+                pc++;
+                break;
+            case 12: //Commands.NOT
+                reg[idx0] = ~reg[idx1]; //TODO: ~ correct?
+                pc++;
+                break;
+            case 13: //TODO: Commands.RET
+                pc++;
+                break;
+            case 14: //TODO: Commands.JIT
+                break;
+            case 15: //TODO: Commands.JSR
+                break;
+            case 16: //TODO: Commands.JMP
                 break;
             default: //Command not Found
                 pc++;
