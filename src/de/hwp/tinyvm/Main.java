@@ -44,6 +44,19 @@ public class Main {
         System.out.println("BEFORE CMD: " + cmd + " | IDX0: " + reg[idx0] + " | IDX1:" + reg[idx1]);
 
         switch (cmd) {
+            case 0: //TODO: Commands.MOVE_FROM_MEM_TO_REG
+                pc++;
+                break;
+            case 1: //TODO: Commands.MOVE_FROM_REG_TO_MEM
+                pc++;
+                break;
+            case 2: //Commands.MOVE_FROM_REG_TO_REG
+                reg[idx0] = reg[idx1];
+                pc++;
+                break;
+            case 3: //TODO: Commands.MOVE_FROM_MEM_TO_MEM
+                pc++;
+                break;
             case 4: //Commands.AND
                 reg[idx0] = reg[idx0] & reg[idx1];
                 pc++;
@@ -89,6 +102,7 @@ public class Main {
                 break;
             case 16: //TODO: Commands.JMP
                 break;
+
             default: //Command not Found
                 pc++;
                 break;
