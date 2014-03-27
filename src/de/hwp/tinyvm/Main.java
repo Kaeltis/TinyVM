@@ -18,7 +18,7 @@ public class Main {
 
         Assembler myAssembler = new Assembler();
         try {
-            memory = myAssembler.fileToOpcode("D:\\test.assembler");
+            memory = myAssembler.fileToOpcode("test.asm");
         } catch (IOException e) {
             e.printStackTrace();
         }
