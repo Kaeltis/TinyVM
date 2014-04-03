@@ -9,39 +9,39 @@ public class Assembler {
     public int[] fileToOpcode(String file) throws IOException {
         //int[] commandArray = new int[countLines(file)];
         int[] commandArray = new int[1024];
-    	int lineNr = 0;
+        int lineNr = 0;
         String line;
         String idx0;
         String idx1;
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
-        
+
         System.out.println("--- Commands START ---");
 
         while ((line = reader.readLine()) != null) {
             String[] command = line.split(" ");
-            if(line.contains(",")) {
-            	idx0 = command[1].split(",")[0];
-            	idx1 = command[1].split(",")[1];            	
-            	System.out.println(command[0] + " " + idx0 + " " + idx1);
+            if (line.contains(",")) {
+                idx0 = command[1].split(",")[0];
+                idx1 = command[1].split(",")[1];
+                System.out.println(command[0] + " " + idx0 + " " + idx1);
             } else {
-            	idx0 = command[1];
-            	idx1 = null;
-            	System.out.println(command[0] + " " + idx0);
+                idx0 = command[1];
+                idx1 = null;
+                System.out.println(command[0] + " " + idx0);
             }
 
             switch (command[0]) {
                 case "MOVE_FROM_MEM_TO_REG":
-                	commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5) | 0;
-                	break;
+                    commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5) | 0;
+                    break;
                 case "MOVE_FROM_REG_TO_MEM":
-                	commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5) | 1;
+                    commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5) | 1;
                     break;
                 case "MOVE_FROM_REG_TO_REG":
                     commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5) | 2;
                     break;
                 case "MOVE_FROM_MEM_TO_MEM":
-                	commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5) | 3;
+                    commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5) | 3;
                     break;
                 case "AND":
                     commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5) | 4;
@@ -89,19 +89,19 @@ public class Assembler {
                     commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | 18;
                     break;
                 case "ORG":
-                	lineNr = Integer.parseInt(idx0);
-                	break;
+                    lineNr = Integer.parseInt(idx0);
+                    break;
                 case "DATA":
-                	commandArray[lineNr] = Integer.parseInt(idx0);
-                	break;
+                    commandArray[lineNr] = Integer.parseInt(idx0);
+                    break;
                 default:
                     commandArray[lineNr] = 0b1000000000000000;
                     break;
             }
-            
+
             lineNr++;
         }
-        
+
         System.out.println("--- Commands END ---");
 
         return commandArray;
