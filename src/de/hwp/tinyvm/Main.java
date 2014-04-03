@@ -49,20 +49,20 @@ public class Main {
         //System.out.println("BEFORE CMD: " + cmd + " | IDX0: " + reg[idx0] + " | IDX1:" + reg[idx1]);
 
         switch (cmd) {
-            case 0: //TODO: Commands.MOVE_FROM_MEM_TO_REG
+            case 0: //Commands.MOVE_FROM_MEM_TO_REG
                 reg[idx1] = memory[idx0];
                 pc++;
                 break;
-            case 1: //TODO: Commands.MOVE_FROM_REG_TO_MEM
-                memory[idx0] = reg[idx1];
+            case 1: //Commands.MOVE_FROM_REG_TO_MEM
+                memory[idx1] = reg[idx0];
                 pc++;
                 break;
             case 2: //Commands.MOVE_FROM_REG_TO_REG
-                reg[idx0] = reg[idx1];
+                reg[idx1] = reg[idx0];
                 pc++;
                 break;
-            case 3: //TODO: Commands.MOVE_FROM_MEM_TO_MEM
-                memory[idx0] = memory[idx1];
+            case 3: //Commands.MOVE_FROM_MEM_TO_MEM
+                memory[idx1] = memory[idx0];
                 pc++;
                 break;
             case 4: //Commands.AND
