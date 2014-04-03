@@ -22,6 +22,6 @@ JSR (N/A)
 JMP (N/A)
 PRINTREG Rx -- Print content of Rx
 PRINTMEM (Rx) -- Print content of (Rx)
-ORG (Rx) -- Set memory address to (Rx)
-DATA Value -- Sets content of current address to Value
+ORG (Rx) -- Set current memory address to (Rx)
+DATA Value -- Set content of current address to Value
 ```
