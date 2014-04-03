@@ -22,16 +22,15 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        reg[4] = 8;
-        reg[3] = 6;
-
+        
+        System.out.println("--- Output START ---");
+        
         Main myVM = new Main();
         while (pc < memory.length) {
             myVM.doCommand();
         }
-
-        System.out.println("Done");
+        
+        System.out.println("--- Output END ---");
     }
 
     public void doCommand() {
@@ -47,13 +46,15 @@ public class Main {
         int idx0 = (opcode & IDX0_MASK) >> 10;
         int load = (opcode & LOAD_MASK) >> 15;
 
-        System.out.println("BEFORE CMD: " + cmd + " | IDX0: " + reg[idx0] + " | IDX1:" + reg[idx1]);
+        //System.out.println("BEFORE CMD: " + cmd + " | IDX0: " + reg[idx0] + " | IDX1:" + reg[idx1]);
 
         switch (cmd) {
             case 0: //TODO: Commands.MOVE_FROM_MEM_TO_REG
+            	reg[idx1] = memory[idx0];
                 pc++;
                 break;
             case 1: //TODO: Commands.MOVE_FROM_REG_TO_MEM
+            	memory[idx0] = reg[idx1];
                 pc++;
                 break;
             case 2: //Commands.MOVE_FROM_REG_TO_REG
@@ -61,6 +62,7 @@ public class Main {
                 pc++;
                 break;
             case 3: //TODO: Commands.MOVE_FROM_MEM_TO_MEM
+            	memory[idx0] = memory[idx1];
                 pc++;
                 break;
             case 4: //Commands.AND
@@ -108,13 +110,20 @@ public class Main {
                 break;
             case 16: //TODO: Commands.JMP
                 break;
-
+            case 17: //Commands.PRINTREG
+            	System.out.println("REGISTER:" + idx0 + " WERT:" + reg[idx0]);
+            	pc++;
+            	break;
+            case 18: //Commands.PRINTMEM
+            	System.out.println("MEMORY:" + idx0 + " WERT:" + memory[idx0]);
+            	pc++;
+            	break;
             default: //Command not Found
                 pc++;
                 break;
         }
 
-        System.out.println("AFTER CMD: " + cmd + " | IDX0: " + reg[idx0] + " | IDX1:" + reg[idx1] + "\n");
+        //System.out.println("AFTER CMD: " + cmd + " | IDX0: " + reg[idx0] + " | IDX1:" + reg[idx1] + "\n");
 
     }
 
