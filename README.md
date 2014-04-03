@@ -15,7 +15,7 @@ SUB Rx,Ry -- Rx = Rx - Ry
 ADD Rx,Ry -- Rx = Rx + Ry
 HIG Rx,Ry -- Rx = Rx > Ry
 EQU Rx,Ry -- Rx = Rx == Ry
-NOT Rx,Ry -- Rx = !Ry
+NOT Rx,Ry -- Rx = ~Ry
 RET (N/A)
 JIT (N/A)
 JSR (N/A)
