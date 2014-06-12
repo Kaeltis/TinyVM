@@ -18,6 +18,7 @@ public class Main {
 	public static int[] reg = new int[32];
 	public static int pc = 0;
 	public static Stack<Integer> stack = new Stack<Integer>();
+	public static int[] profiler = new int[1024];
 
 	public static void main(String[] args) {
 
@@ -28,7 +29,7 @@ public class Main {
 			e.printStackTrace();
 		}
 
-		System.out.println("--- Output START ---");
+		System.out.println("\n--- Output START ---");
 
 		Main myVM = new Main();
 		while (pc < memory.length) {
@@ -36,10 +37,14 @@ public class Main {
 		}
 
 		System.out.println("--- Output END ---");
+		
+		System.out.println("\nProfile:");
+		System.out.println(java.util.Arrays.toString(profiler));
 	}
 
 	public void doCommand() {
 		int opcode = memory[pc];
+		profiler[pc]++;
 
 		if (opcode == 0) {
 			pc++;
