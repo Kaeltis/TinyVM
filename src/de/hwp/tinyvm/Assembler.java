@@ -16,9 +16,17 @@ public class Assembler {
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
 
-        System.out.println("--- Commands START ---");
+        System.out.println("--- Program START ---");
 
         while ((line = reader.readLine()) != null) {
+        	if(line.equals("")) {
+        		continue;
+        	}
+        	
+        	if(line.contains(" #")) {
+        		line = line.split(" #")[0];
+        	}
+        	
             String[] command = line.split(" ");
             if (line.contains(",")) {
                 idx0 = command[1].split(",")[0];
@@ -71,28 +79,25 @@ public class Assembler {
                     commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5) | 12;
                     break;
                 case "RET":
-                    //TODO: RET
+                	commandArray[lineNr] = 0b1000000000000000 | 13;
                     break;
                 case "JIT":
-                    //TODO: JIT
+                	commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 5) | 14;
                     break;
                 case "JSR":
-                    //TODO: JSR
+                	commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 5) | 15;
                     break;
                 case "JMP":
-                    //TODO: JMP
+                	commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 5) | 16;
+                    break;
+                case "LOAD":
+                    commandArray[lineNr] = 0b0000000000000000 | Integer.parseInt(idx0);
                     break;
                 case "PRINTREG":
                     commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | 17;
                     break;
                 case "PRINTMEM":
                     commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | 18;
-                    break;
-                case "ORG":
-                    lineNr = Integer.parseInt(idx0);
-                    break;
-                case "DATA":
-                    commandArray[lineNr] = Integer.parseInt(idx0);
                     break;
                 default:
                     commandArray[lineNr] = 0b1000000000000000;
@@ -102,7 +107,7 @@ public class Assembler {
             lineNr++;
         }
 
-        System.out.println("--- Commands END ---");
+        System.out.println("--- Program END ---");
 
         return commandArray;
 
