@@ -17,7 +17,9 @@ public enum Commands {
     RET(13),
     JIT(14),
     JSR(15),
-    JMP(16);
+    JMP(16),
+    PRINTREG(17),
+    PRINTMEM(18);
 
     int value;
 
