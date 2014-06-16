@@ -3,12 +3,15 @@ package de.hwp.tinyvm;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Assembler {
+    List<String> programList = new LinkedList<>();
 
     public int[] fileToOpcode(String file) throws IOException {
-        //int[] commandArray = new int[countLines(file)];
         int[] commandArray = new int[1024];
+
         int lineNr = 0;
         String line;
         String idx0;
@@ -16,31 +19,33 @@ public class Assembler {
 
         BufferedReader reader = new BufferedReader(new FileReader(file));
 
-        System.out.println("--- Program START ---");
+        System.out.println("--- Assembler START ---");
 
         while ((line = reader.readLine()) != null) {
-        	if(line.equals("")) {
-        		continue;
-        	}
-        	
-        	if(line.contains(" #")) {
-        		line = line.split(" #")[0];
-        	}
-        	
+            if (line.equals("")) {
+                continue;
+            }
+
+            if (line.contains(" #")) {
+                line = line.split(" #")[0];
+            }
+
             String[] command = line.split(" ");
             if (line.contains(",")) {
                 idx0 = command[1].split(",")[0];
                 idx1 = command[1].split(",")[1];
                 System.out.println(command[0] + " " + idx0 + " " + idx1);
+                programList.add(command[0] + " " + idx0 + " " + idx1);
             } else {
                 idx0 = command[1];
                 idx1 = null;
                 System.out.println(command[0] + " " + idx0);
+                programList.add(command[0] + " " + idx0);
             }
 
             switch (command[0]) {
                 case "MOVE_FROM_MEM_TO_REG":
-                    commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5) | 0;
+                    commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5);
                     break;
                 case "MOVE_FROM_REG_TO_MEM":
                     commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5) | 1;
@@ -79,19 +84,19 @@ public class Assembler {
                     commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | (Integer.parseInt(idx1) << 5) | 12;
                     break;
                 case "RET":
-                	commandArray[lineNr] = 0b1000000000000000 | 13;
+                    commandArray[lineNr] = 0b1000000000000000 | 13;
                     break;
                 case "JIT":
-                	commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 5) | 14;
+                    commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 5) | 14;
                     break;
                 case "JSR":
-                	commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 5) | 15;
+                    commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 5) | 15;
                     break;
                 case "JMP":
-                	commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 5) | 16;
+                    commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 5) | 16;
                     break;
                 case "LOAD":
-                    commandArray[lineNr] = 0b0000000000000000 | Integer.parseInt(idx0);
+                    commandArray[lineNr] = Integer.parseInt(idx0);
                     break;
                 case "PRINTREG":
                     commandArray[lineNr] = 0b1000000000000000 | (Integer.parseInt(idx0) << 10) | 17;
@@ -107,18 +112,13 @@ public class Assembler {
             lineNr++;
         }
 
-        System.out.println("--- Program END ---");
+        System.out.println("--- Assembler END ---");
 
         return commandArray;
 
     }
 
-    private int countLines(String file) throws IOException {
-        int lines = 0;
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        while (reader.readLine() != null) lines++;
-        reader.close();
-        return lines;
+    public List<String> getProgramList() {
+        return programList;
     }
-
 }
