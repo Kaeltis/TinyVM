@@ -20,7 +20,7 @@ RET -- Pops pc from stack and returns +1
 JIT -- Jumps to memory address if R0 != 0
 JSR -- Jumps to memory address and pushes current pc to stack
 JMP -- Jumps to memory address
-PRINTREG Rx -- Print content of Rx
-PRINTMEM (Rx) -- Print content of (Rx)
+PRINTREG Rx -- Prints content of Rx to the console
+PRINTMEM (Rx) -- Prints content of (Rx) to the console
 LOAD -- Loads value to R0
 ```
