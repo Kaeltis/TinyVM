@@ -24,18 +24,16 @@ public class Main {
 
         Assembler myAssembler = new Assembler();
         try {
-            memory = myAssembler.fileToOpcode("test.asm");
+            memory = myAssembler.fileToOpcode("program.asm");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         System.out.println("\n--- TinyVM START ---");
-
         Main myVM = new Main();
         while (pc < memory.length) {
             myVM.doCommand();
         }
-
         System.out.println("--- TinyVM END ---");
 
         System.out.println("\n--- Profiler START ---");
