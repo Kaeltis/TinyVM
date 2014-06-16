@@ -16,12 +16,11 @@ ADD Rx,Ry -- Rx = Rx + Ry
 HIG Rx,Ry -- Rx = Rx > Ry
 EQU Rx,Ry -- Rx = Rx == Ry
 NOT Rx,Ry -- Rx = ~Ry
-RET (N/A)
-JIT (N/A)
-JSR (N/A)
-JMP (N/A)
+RET -- Pops pc from stack and returns +1
+JIT -- Jumps to memory address if R0 != 0
+JSR -- Jumps to memory address and pushes current pc to stack
+JMP -- Jumps to memory address
 PRINTREG Rx -- Print content of Rx
 PRINTMEM (Rx) -- Print content of (Rx)
-ORG (Rx) -- Set current memory address to (Rx)
-DATA Value -- Set content of current address to Value
+LOAD -- Loads value to R0
 ```
