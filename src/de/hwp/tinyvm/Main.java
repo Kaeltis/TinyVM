@@ -150,11 +150,11 @@ public class Main {
                     pc = jump;
                     break;
                 case 17: // Commands.PRINTREG
-                    System.out.println("REGISTER:" + idx0 + " WERT:" + reg[idx0]);
+                    System.out.println("REGISTER:" + idx0 + " VALUE:" + reg[idx0]);
                     pc++;
                     break;
                 case 18: // Commands.PRINTMEM
-                    System.out.println("MEMORY:" + reg[idx0] + " WERT:" + memory[reg[idx0]]);
+                    System.out.println("MEMORY:" + reg[idx0] + " VALUE:" + memory[reg[idx0]]);
                     pc++;
                     break;
                 default: // Command not Found
