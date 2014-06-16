@@ -3,6 +3,7 @@ TinyVM
 
 Commands:
 ```
+LOAD -- Loads value to R0
 MOVE_FROM_MEM_TO_REG (Rx),Ry -- Moves the content of (Rx) to Ry
 MOVE_FROM_REG_TO_MEM Rx,(Ry) -- Moves the content of Rx to (Ry)
 MOVE_FROM_REG_TO_REG Rx,Ry -- Moves the content of Rx to Ry
@@ -22,5 +23,4 @@ JSR -- Jumps to memory address and pushes current pc to stack
 JMP -- Jumps to memory address
 PRINTREG Rx -- Prints content of Rx to the console
 PRINTMEM (Rx) -- Prints content of (Rx) to the console
-LOAD -- Loads value to R0
 ```
